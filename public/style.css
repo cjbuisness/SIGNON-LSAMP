@@ -8,7 +8,7 @@
   /* Body Styling */
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #E6ECF0; /* Light gray-blue background */
+    background: radial-gradient(circle, #9ad7ff, #25bef1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,7 +29,7 @@
   
   /* Form Title */
   h2 {
-    color: #1DA1F2; /* Twitter's signature blue */
+    color: #25bef1; /* Twitter's signature blue */
     font-size: 24px;
     margin-bottom: 20px;
   }
@@ -68,14 +68,15 @@
   
   /* Button hover effect */
   button:hover {
-    background-color: #1991E6; /* Slightly darker blue on hover */
+    background-color: #25bef1; /* Slightly darker blue on hover */
   }
   
   /* Status message styling */
   #statusMessage {
     margin-top: 15px;
-    color: #1DA1F2;
+    color: #25bef1;
     font-size: 14px;
     text-align: center;
   }
+  
   
