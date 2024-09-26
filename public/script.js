@@ -30,17 +30,35 @@ document.getElementById('signinForm').addEventListener('submit', function (event
     return;
   }
 
-  // If validation passes, append data to CSV file (mocked for offline use)
+  // If validation passes, prepare data to send to the server
   const currentTime = new Date().toLocaleString();
-  const signInData = `${firstName},${lastName},${studentId},${currentTime}\n`;
+  const signInData = {
+    name: `${firstName} ${lastName}`,  // Combine first and last name
+    studentId: studentId,
+    time: currentTime
+  };
 
-  // Use the server logic here to save to CSV file (mocking as a console log)
-  console.log('Sign-in Data:', signInData);
-
-  statusMessage.textContent = 'Sign-in successful!';
-
-  // Clear input fields
-  document.getElementById('firstName').value = '';
-  document.getElementById('lastName').value = '';
-  document.getElementById('studentId').value = '';
+  // Send data to the server
+  fetch('/signin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(signInData)
+  })
+  .then(response => {
+    if (response.ok) {
+      statusMessage.textContent = 'Sign-in successful!';
+      // Clear input fields
+      document.getElementById('firstName').value = '';
+      document.getElementById('lastName').value = '';
+      document.getElementById('studentId').value = '';
+    } else {
+      statusMessage.textContent = 'Failed to sign in.';
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    statusMessage.textContent = 'Error submitting the form.';
+  });
 });
