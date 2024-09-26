@@ -1,82 +1,104 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body Styling */
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: radial-gradient(circle, #9ad7ff, #25bef1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  /* Container Styling */
-  .form-container {
-    background-color: white;
-    padding: 30px 40px;
-    border-radius: 20px; /* Soft rounded edges */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    text-align: center;
-    max-width: 350px;
-    width: 100%;
-  }
-  
-  /* Form Title */
-  h2 {
-    color: #25bef1; /* Twitter's signature blue */
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  /* Input Fields */
-  input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 2px solid #ccc;
-    border-radius: 50px; /* Rounded corners for inputs */
-    font-size: 16px;
-    color: #333;
-    transition: border-color 0.3s ease;
-  }
-  
-  /* Change border color on focus */
-  input:focus {
-    border-color: #1DA1F2;
-    outline: none;
-  }
-  
-  /* Button Styling */
-  button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background-color: #1DA1F2; /* Twitter's blue */
-    color: white;
-    border: none;
-    border-radius: 50px; /* Rounded button */
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Button hover effect */
-  button:hover {
-    background-color: #25bef1; /* Slightly darker blue on hover */
-  }
-  
-  /* Status message styling */
-  #statusMessage {
-    margin-top: 15px;
-    color: #25bef1;
-    font-size: 14px;
-    text-align: center;
-  }
-  
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle, #9ad7ff, #25bef1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Background Shape */
+.background-shape {
+  position: absolute;
+  top: 50%; /* Center the shape vertically */
+  left: 50%; /* Center the shape horizontally */
+  width: 610px;
+  height: 610px;
+  background-color: #b3deec;
+  opacity: 0.3;
+  border-radius: 100%;
+  z-index: -100; /* Places it behind the form */
+  transform: translate(-50%, -50%); /* Center the shape */
+}
+
+/* Container Styling */
+.form-container {
+  background-color: #cdf1fc;
+  position: relative; /* Change to relative */
+  padding: 30px 40px;
+  border-radius: 90px; /* Soft rounded edges */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Larger and softer shadow */
+  text-align: center;
+  max-width: 350px;
+  width: 100%;
+  margin: 0 auto; /* Center the form */
+  z-index: 1; /* Ensure it is on top of the background shape */
+}
+
+/* Form Title */
+h2 {
+  color: #25bef1; /* Twitter's signature blue */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 50px; /* Rounded corners for inputs */
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+/* Change border color on focus */
+input:focus {
+  border-color: #1DA1F2;
+  outline: none;
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #1DA1F2; /* Twitter's blue */
+  color: white;
+  border: none;
+  border-radius: 50px; /* Rounded button */
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #25bef1; /* Slightly darker blue on hover */
+}
+
+/* Status message styling */
+#statusMessage {
+  margin-top: 15px;
+  color: #127393;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Logo */
+.logo {
+  width: 100px; /* Set desired width */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 20px; /* Space below the image */
+}
