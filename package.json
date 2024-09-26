@@ -1,0 +1,17 @@
+{
+    "name": "student-signin",
+    "version": "1.0.0",
+    "description": "Offline student sign-in form that saves sign-in data to a CSV file.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.20.3",
+        "csv-writer": "^1.6.0",
+        "express": "^4.21.0"
+    },
+    "keywords": []
+}
