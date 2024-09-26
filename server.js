@@ -1,40 +1,60 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { createObjectCsvWriter } = require('csv-writer');
+const http = require('http');
+const fs = require('fs');
+const url = require('url');
 
-const app = express();
 const port = 3000;
 
-// Middleware
-app.use(bodyParser.json());
-app.use(express.static('public'));  // Serve static files from the 'public' folder
+// Create an HTTP server
+const server = http.createServer((req, res) => {
+  // Handle POST requests to /signin
+  if (req.method === 'POST' && req.url === '/signin') {
+    let body = '';
 
-// CSV Writer
-const csvWriter = createObjectCsvWriter({
-  path: 'signins.csv',
-  header: [
-    { id: 'name', title: 'Name' },
-    { id: 'studentId', title: 'Student ID' },
-    { id: 'time', title: 'Sign-In Time' }
-  ],
-  append: true  // Append to the file if it already exists
-});
-
-// Handle form submissions
-app.post('/signin', (req, res) => {
-  const { name, studentId, time } = req.body;
-
-  csvWriter.writeRecords([{ name, studentId, time }])
-    .then(() => {
-      res.status(200).send('Sign-in recorded.');
-    })
-    .catch(err => {
-      console.error('Error writing to CSV:', err);
-      res.status(500).send('Error recording sign-in.');
+    // Collect request data
+    req.on('data', chunk => {
+      body += chunk.toString();
     });
+
+    req.on('end', () => {
+      const signInData = JSON.parse(body);
+      const { name, studentId, time } = signInData;
+
+      // Create CSV format
+      const csvRow = `${name},${studentId},${time}\n`;
+
+      // Write to CSV
+      fs.appendFile('signins.csv', csvRow, err => {
+        if (err) {
+          console.error('Error writing to CSV:', err);
+          res.writeHead(500, { 'Content-Type': 'text/plain' });
+          res.end('Error recording sign-in.');
+        } else {
+          res.writeHead(200, { 'Content-Type': 'text/plain' });
+          res.end('Sign-in recorded.');
+        }
+      });
+    });
+  } else if (req.method === 'GET') {
+    // Serve static files from the 'public' folder
+    const parsedUrl = url.parse(req.url);
+    const filePath = `public${parsedUrl.pathname}`;
+    
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('File not found.');
+      } else {
+        res.writeHead(200);
+        res.end(data);
+      }
+    });
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not found.');
+  }
 });
 
 // Start the server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
