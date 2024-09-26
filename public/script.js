@@ -48,11 +48,18 @@ document.getElementById('signinForm').addEventListener('submit', function (event
   })
   .then(response => {
     if (response.ok) {
-      statusMessage.textContent = 'Sign-in successful!';
+      // Set the success message with the first name included
+      statusMessage.textContent = `Sign-in successful! Thank you, ${firstName}!`;
+      
       // Clear input fields
       document.getElementById('firstName').value = '';
       document.getElementById('lastName').value = '';
       document.getElementById('studentId').value = '';
+
+      // Hide the message after 8 seconds
+      setTimeout(() => {
+        statusMessage.textContent = ''; // Clear the message
+      }, 3000);
     } else {
       statusMessage.textContent = 'Failed to sign in.';
     }
